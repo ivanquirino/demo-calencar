@@ -5,6 +5,7 @@ const style = {
   cursor: "pointer",
   "&:hover": { bg: "secondary" },
   "&:active": { bg: "text" },
+  "&:disabled": { bg: "gray", cursor: "auto" },
 };
 
 export default ({ sx, children, ...props }) => (

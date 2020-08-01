@@ -1,6 +1,6 @@
 import reducer, { nextMonth, previousMonth, setMonth, setDate } from "../state";
 
-describe("Calender state reducer", () => {
+describe("Calendar state", () => {
   test("nextMonth action", () => {
     const initialState = {
       year: 2020,
