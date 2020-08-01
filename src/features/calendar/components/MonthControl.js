@@ -16,7 +16,7 @@ function MonthControl({ children }) {
       <Flex sx={{ justifyContent: "space-between" }}>
         <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
           <Button onClick={previousClick}>{"<"}</Button>
-          <Heading as="h2" mx={4}>
+          <Heading as="h2" sx={{ width: "300px", textAlign: "center" }}>
             {children}
           </Heading>
           <Button onClick={nextClick}>{">"}</Button>
