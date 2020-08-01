@@ -13,15 +13,15 @@ const initialValues = {
   hour: "",
   minute: "",
   city: "",
-  color: "#FFFFFF",
+  color: "",
 };
 
 const validationSchema = Yup.object().shape({
   reminder: Yup.string().required().max(30),
   hour: Yup.number().required().min(0).max(23),
   minute: Yup.number().required().min(0).max(59),
-  city: Yup.string(),
-  color: Yup.string(),
+  city: Yup.string().required(),
+  color: Yup.string().required(),
 });
 
 function ReminderForm({ date }) {
@@ -58,6 +58,7 @@ function ReminderForm({ date }) {
                 label="Hour"
                 min={0}
                 max={23}
+                maxLength={2}
                 sx={{ width: "64px" }}
               />
             </Box>
@@ -68,6 +69,7 @@ function ReminderForm({ date }) {
                 label="Minute"
                 min={0}
                 max={59}
+                maxLength={2}
                 sx={{ width: "64px" }}
               />
             </Box>

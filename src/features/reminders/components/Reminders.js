@@ -11,7 +11,7 @@ function Reminders({ date }) {
     <>
       <Text mb={3}>Reminders for the day:</Text>
       {reminders.map((item) => {
-        const { id, reminder, city, color, hour, minute } = item;
+        const { id, reminder, city, color, time } = item;
 
         return (
           <Flex
@@ -27,7 +27,7 @@ function Reminders({ date }) {
           >
             <Button sx={{ mr: 3 }}>Edit</Button>
             <Text>
-              {reminder} at {hour}:{minute} on {city}
+              {reminder} at {time} on {city}
             </Text>
           </Flex>
         );

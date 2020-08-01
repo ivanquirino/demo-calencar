@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Box } from "theme-ui";
+import { Box, Text } from "theme-ui";
 import { isWeekend, getDate, isToday, isSameMonth } from "date-fns";
 import { setDate } from "../state";
+import RemindersMicroList from "../../reminders/components/RemindersMicroList";
 
 const getStyle = (date, currentMonthDate) => {
   const weekend = isWeekend(date);
@@ -39,7 +40,8 @@ function DayOfMonth(props) {
 
   return (
     <Box sx={style} onClick={click}>
-      {getDate(date)}
+      <Text>{getDate(date)}</Text>
+      <RemindersMicroList date={date} />
     </Box>
   );
 }
