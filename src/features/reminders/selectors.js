@@ -13,7 +13,7 @@ const dateReminders = (state, date) => {
       const time = format(setMinutes(setHours(date, hour), minute), "kk:mm");
       const short = `${time} ${reminder}`;
 
-      return { ...item, short };
+      return { ...item, short, time };
     });
   }
 
