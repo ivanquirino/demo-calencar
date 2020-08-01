@@ -6,7 +6,6 @@ import { Flex, Box, Heading } from "theme-ui";
 import { dateDataSelector } from "../selectors";
 import { setMonth } from "../state";
 import ReminderForm from "../../reminders/components/ReminderForm";
-import Reminders from "../../reminders/components/Reminders";
 
 function DateDetail() {
   const dispatch = useDispatch();
@@ -24,9 +23,6 @@ function DateDetail() {
       </Flex>
       <Box mt={3}>
         <ReminderForm date={date} />
-      </Box>
-      <Box mt={4}>
-        <Reminders date={date} />
       </Box>
     </Modal>
   );

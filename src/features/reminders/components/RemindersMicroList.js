@@ -7,10 +7,11 @@ function RemindersMicroList({ date }) {
   const reminders = useSelector((state) => dateRemindersSelector(state, date));
 
   return reminders.map((item) => {
-    const { short, color } = item;
+    const { short, color, id } = item;
 
     return (
       <Box
+        key={id}
         sx={{
           border: "1px solid",
           borderColor: color,

@@ -5,7 +5,8 @@ import * as Yup from "yup";
 import Field from "components/Field";
 import Button from "components/Button";
 import { useDispatch } from "react-redux";
-import { addReminder } from "../state";
+import { submitReminder } from "../state";
+import Reminders from "./Reminders";
 
 const initialValues = {
   id: "",
@@ -28,7 +29,7 @@ function ReminderForm({ date }) {
   const dispatch = useDispatch();
 
   const submitForm = (values, actions) => {
-    dispatch(addReminder(date, values));
+    dispatch(submitReminder(date, values));
     actions.resetForm();
   };
 
@@ -39,61 +40,74 @@ function ReminderForm({ date }) {
       validateOnMount={true}
       onSubmit={submitForm}
     >
-      {({ isValid }) => (
-        <Form>
-          <Field type="hidden" name="id" />
-          <Flex sx={{ justifyContent: "space-between" }}>
-            <Box>
-              <Field
-                type="text"
-                name="reminder"
-                label="Remind me of"
-                maxLength={30}
-              />
+      {({ isValid, setValues, values }) => {
+        const buttonText = values.id ? "Edit Reminder" : "Add Reminder";
+
+        return (
+          <>
+            <Form>
+              <Field type="hidden" name="id" />
+              <Flex sx={{ justifyContent: "space-between" }}>
+                <Box>
+                  <Field
+                    type="text"
+                    name="reminder"
+                    label="Remind me of"
+                    maxLength={30}
+                  />
+                </Box>
+                <Box>
+                  <Field
+                    type="number"
+                    name="hour"
+                    label="Hour"
+                    min={0}
+                    max={23}
+                    maxLength={2}
+                    sx={{ width: "64px" }}
+                  />
+                </Box>
+                <Box>
+                  <Field
+                    type="number"
+                    name="minute"
+                    label="Minute"
+                    min={0}
+                    max={59}
+                    maxLength={2}
+                    sx={{ width: "64px" }}
+                  />
+                </Box>
+                <Box>
+                  <Field type="text" name="city" label="City" maxLength={30} />
+                </Box>
+                <Box>
+                  <Field
+                    type="color"
+                    name="color"
+                    label="Color"
+                    sx={{ height: "40px", cursor: "pointer" }}
+                  />
+                </Box>
+              </Flex>
+              <Box mt={3}>
+                <Flex sx={{ justifyContent: "center" }}>
+                  <Button
+                    type="submit"
+                    sx={{ width: "50%" }}
+                    disabled={!isValid}
+                  >
+                    {buttonText}
+                  </Button>
+                </Flex>
+              </Box>
+            </Form>
+            <Box mt={4}>
+              <Reminders date={date} setValues={setValues} />
             </Box>
-            <Box>
-              <Field
-                type="number"
-                name="hour"
-                label="Hour"
-                min={0}
-                max={23}
-                maxLength={2}
-                sx={{ width: "64px" }}
-              />
-            </Box>
-            <Box>
-              <Field
-                type="number"
-                name="minute"
-                label="Minute"
-                min={0}
-                max={59}
-                maxLength={2}
-                sx={{ width: "64px" }}
-              />
-            </Box>
-            <Box>
-              <Field type="text" name="city" label="City" maxLength={30} />
-            </Box>
-            <Box>
-              <Field
-                type="color"
-                name="color"
-                label="Color"
-                sx={{ height: "40px", cursor: "pointer" }}
-              />
-            </Box>
-          </Flex>
-          <Box mt={3}>
-            <Flex sx={{ justifyContent: "center" }}>
-              <Button type="submit" sx={{ width: "50%" }} disabled={!isValid}>
-                Add Reminder
-              </Button>
-            </Flex>
-          </Box>
-        </Form>
-      )}
+          </>
+        );
+      }}
     </Formik>
   );
 }
