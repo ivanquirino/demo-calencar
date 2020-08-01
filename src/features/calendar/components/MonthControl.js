@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Heading, Flex, Box } from "theme-ui";
-import { nextMonth, previousMonth, setMonthFromDate } from "../state";
+import { nextMonth, previousMonth, setMonth } from "../state";
 import Button from "components/Button";
 
 function MonthControl({ children }) {
@@ -9,7 +9,7 @@ function MonthControl({ children }) {
 
   const nextClick = () => dispatch(nextMonth());
   const previousClick = () => dispatch(previousMonth());
-  const currentClick = () => dispatch(setMonthFromDate(new Date()));
+  const currentClick = () => dispatch(setMonth(new Date()));
 
   return (
     <Box my={4}>

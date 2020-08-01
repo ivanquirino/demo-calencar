@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getYear, getMonth, addMonths, subMonths } from "date-fns";
+import { getYear, getMonth, getDate, addMonths, subMonths } from "date-fns";
 
 const now = new Date();
 
@@ -20,30 +20,42 @@ const slice = createSlice({
       const current = new Date(year, month);
       const next = addMonths(current, 1);
 
-      return { ...state, year: getYear(next), month: getMonth(next) };
+      return { ...state, year: getYear(next), month: getMonth(next), date: 0 };
     },
     previousMonth: (state) => {
       const { year, month } = state;
       const current = new Date(year, month);
       const previous = subMonths(current, 1);
 
-      return { ...state, year: getYear(previous), month: getMonth(previous) };
+      return {
+        ...state,
+        year: getYear(previous),
+        month: getMonth(previous),
+        date: 0,
+      };
     },
-    setMonthFromDate: {
+    setDate: {
       reducer: (state, action) => {
-        const { year, month } = action.payload;
+        const { year, month, date } = action.payload;
 
-        return { ...state, year, month };
+        return { ...state, year, month, date };
       },
       prepare: (date) => ({
-        payload: { year: getYear(date), month: getMonth(date) },
+        payload: {
+          year: getYear(date),
+          month: getMonth(date),
+          date: getDate(date),
+        },
       }),
     },
   },
 });
 
-const { reducer } = slice;
+export const { nextMonth, previousMonth, setDate } = slice.actions;
 
-export default reducer;
+export const setMonth = (date) => ({
+  type: setDate.type,
+  payload: { year: getYear(date), month: getMonth(date), date: 0 },
+});
 
-export const { nextMonth, previousMonth, setMonthFromDate } = slice.actions;
+export default slice.reducer;

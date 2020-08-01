@@ -1,10 +1,4 @@
-import reducer, { nextMonth, previousMonth, setMonthFromDate } from "../state";
-
-const initialState = {
-  year: 2020,
-  month: 11,
-  date: 0,
-};
+import reducer, { nextMonth, previousMonth, setMonth } from "../state";
 
 describe("Calender state reducer", () => {
   test("nextMonth action", () => {
@@ -40,7 +34,7 @@ describe("Calender state reducer", () => {
 
     const dateToSet = new Date(2020, 7);
 
-    const state = reducer(initialState, setMonthFromDate(dateToSet));
+    const state = reducer(initialState, setMonth(dateToSet));
 
     expect(state).toEqual({ ...initialState, year: 2020, month: 7 });
   });
