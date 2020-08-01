@@ -1,8 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import calendar from "features/calendar/state/calendar";
 
 export default configureStore({
-  reducer: {
-    counter: counterReducer,
-  },
+  reducer: { calendar },
 });
