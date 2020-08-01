@@ -7,11 +7,15 @@ function Calendar({ data, currentMonthDate }) {
   return (
     <Box>
       <WeekdaysHeader />
-      {data.map((calendarRow) => (
-        <Box>
+      {data.map((calendarRow, i) => (
+        <Box key={i.toString()}>
           <Flex>
             {calendarRow.map((date) => (
-              <DayOfMonth date={date} currentMonthDate={currentMonthDate} />
+              <DayOfMonth
+                key={date.toString()}
+                date={date}
+                currentMonthDate={currentMonthDate}
+              />
             ))}
           </Flex>
         </Box>
