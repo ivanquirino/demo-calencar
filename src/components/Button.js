@@ -7,4 +7,8 @@ const style = {
   "&:active": { bg: "text" },
 };
 
-export default (props) => <Button {...props} sx={style} />;
+export default ({ sx, children, ...props }) => (
+  <Button {...props} sx={{ ...style, ...sx }}>
+    {children}
+  </Button>
+);

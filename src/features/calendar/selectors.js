@@ -5,6 +5,7 @@ import { eachDayOfInterval, format } from "date-fns";
 
 export const year = (state) => state.calendar.year;
 export const month = (state) => state.calendar.month;
+export const date = (state) => state.calendar.date;
 
 export const calendarDataSelector = createSelector(
   [year, month],
@@ -23,5 +24,15 @@ export const calendarDataSelector = createSelector(
     );
 
     return { calendar, currentMonthDate, monthText };
+  }
+);
+
+export const dateDataSelector = createSelector(
+  [year, month, date],
+  (year, month, date) => {
+    const selectedDate = new Date(year, month, date);
+    const dateText = format(selectedDate, "MMMM d, yyyy");
+
+    return { show: date > 0, dateText, date: selectedDate };
   }
 );
