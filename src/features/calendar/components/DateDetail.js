@@ -25,7 +25,7 @@ function DateDetail() {
       <Box mt={3}>
         <ReminderForm date={date} />
       </Box>
-      <Box mt={3}>
+      <Box mt={4}>
         <Reminders date={date} />
       </Box>
     </Modal>

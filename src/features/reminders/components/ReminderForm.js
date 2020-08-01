@@ -27,8 +27,9 @@ const validationSchema = Yup.object().shape({
 function ReminderForm({ date }) {
   const dispatch = useDispatch();
 
-  const submitForm = (values) => {
+  const submitForm = (values, actions) => {
     dispatch(addReminder(date, values));
+    actions.resetForm();
   };
 
   return (

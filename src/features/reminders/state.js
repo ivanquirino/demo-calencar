@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { formatISO } from "date-fns";
-import { reminderCompare } from "./functions";
+import { reminderCompare, getDateKey } from "./functions";
+import { v4 as uuid } from "uuid";
 
 const slice = createSlice({
   name: "reminders",
@@ -16,9 +16,10 @@ const slice = createSlice({
         return { ...state, [dateKey]: newReminders };
       },
       prepare: (date, values) => {
-        const dateKey = formatISO(date, { representation: "date" });
+        const dateKey = getDateKey(date);
+        const id = values.id ? values.id : uuid();
 
-        return { payload: { dateKey, values } };
+        return { payload: { dateKey, values: { ...values, id } } };
       },
     },
   },
