@@ -1,13 +1,30 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Box } from "theme-ui";
-import { isWeekend, getDate } from "date-fns";
+import { isWeekend, getDate, isToday, isSameMonth } from "date-fns";
 
 function DayOfMonth(props) {
-  const { date } = props;
+  const { date, currentMonthDate } = props;
 
-  const bg = isWeekend(date) ? "muted" : "white";
+  const weekend = isWeekend(date);
+  const today = isToday(date);
+  const fontWeight = today ? "bold" : "normal";
+  const borderColor = today ? "secondary" : "lightgrey";
+  const bg = weekend ? "muted" : "white";
+  let color = weekend ? "highlight" : "text";
+  color = isSameMonth(currentMonthDate, date) ? color : "grey";
+
   return (
-    <Box sx={{ height: 128, width: "100%", bg, border: "1px solid lightgrey" }}>
+    <Box
+      sx={{
+        color,
+        bg,
+        fontWeight,
+        height: 128,
+        width: "100%",
+        border: "1px solid",
+        borderColor,
+      }}
+    >
       {getDate(date)}
     </Box>
   );

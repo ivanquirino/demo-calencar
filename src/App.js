@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Box, Heading } from "theme-ui";
-import CalendarContainer from "features/calendar";
+import CalendarContainer from "features/calendar/components/CalendarContainer";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
           Demo Calendar App
         </Heading>
       </Box>
-      <Box mt={5}>
+      <Box mt={5} mb={5}>
         <CalendarContainer />
       </Box>
     </Container>

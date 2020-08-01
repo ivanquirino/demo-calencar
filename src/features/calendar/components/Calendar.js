@@ -1,13 +1,9 @@
 import React from "react";
 import { Flex, Box } from "theme-ui";
 import WeekdaysHeader from "./WeekdaysHeader";
-import { range } from "ramda";
 import DayOfMonth from "./DayOfMonth";
 
-const daysOfWeek = range(0, 7);
-const fiveWeeks = range(0, 5);
-
-function Calendar({ data }) {
+function Calendar({ data, currentMonthDate }) {
   return (
     <Box>
       <WeekdaysHeader />
@@ -15,7 +11,7 @@ function Calendar({ data }) {
         <Box>
           <Flex>
             {calendarRow.map((date) => (
-              <DayOfMonth date={date} />
+              <DayOfMonth date={date} currentMonthDate={currentMonthDate} />
             ))}
           </Flex>
         </Box>
