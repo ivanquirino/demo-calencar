@@ -7,7 +7,7 @@ const slice = createSlice({
   name: "reminders",
   initialState: {},
   reducers: {
-    addReminder: (state, action) => {
+    add: (state, action) => {
       const { dateKey, values } = action.payload;
 
       const dateReminders = state[dateKey] || [];
@@ -15,7 +15,7 @@ const slice = createSlice({
 
       return { ...state, [dateKey]: newReminders };
     },
-    editReminder: (state, action) => {
+    edit: (state, action) => {
       const { dateKey, values } = action.payload;
       const id = values.id;
 
@@ -27,13 +27,20 @@ const slice = createSlice({
 
       return { ...state, [dateKey]: edited };
     },
+    deleteAll: {
+      reducer: (state, action) => {
+        const dateKey = action.payload;
+        return { ...state, [dateKey]: [] };
+      },
+      prepare: (date) => ({ payload: getDateKey(date) }),
+    },
   },
 });
 
-export const { addReminder, editReminder } = slice.actions;
+export const { add, edit, deleteAll } = slice.actions;
 
-export const submitReminder = (date, values) => {
-  const action = values.id ? editReminder : addReminder;
+export const submit = (date, values) => {
+  const action = values.id ? edit : add;
 
   const { id, hour, minute } = values;
 

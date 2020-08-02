@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { Box } from "theme-ui";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { submitReminder } from "../state";
+import { submit } from "../state";
 import Reminders from "./Reminders";
 import ReminderForm from "./ReminderForm";
 
@@ -28,7 +28,7 @@ function ReminderContainer({ date }) {
   const dispatch = useDispatch();
 
   const submitForm = (values, actions) => {
-    dispatch(submitReminder(date, values));
+    dispatch(submit(date, values));
     actions.resetForm();
   };
 

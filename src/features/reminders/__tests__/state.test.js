@@ -1,9 +1,10 @@
 import { validate } from "uuid";
 
 import reducer, {
-  addReminder,
-  editReminder,
-  submitReminder,
+  add,
+  edit,
+  submit,
+  deleteAll,
 } from "features/reminders/state";
 
 describe("Reminders state", () => {
@@ -32,12 +33,9 @@ describe("Reminders state", () => {
   test("addReminder action", () => {
     const initialState = {};
 
-    let state = reducer(
-      initialState,
-      addReminder({ dateKey, values: secondEvent })
-    );
+    let state = reducer(initialState, add({ dateKey, values: secondEvent }));
 
-    state = reducer(state, addReminder({ dateKey, values: firstEvent }));
+    state = reducer(state, add({ dateKey, values: firstEvent }));
 
     expect(state).toEqual({
       [dateKey]: [firstEvent, secondEvent],
@@ -45,16 +43,21 @@ describe("Reminders state", () => {
   });
 
   test("editReminder action", () => {
-    const initialState = { "2020-08-01": [firstEvent, secondEvent] };
+    const initialState = { [dateKey]: [firstEvent, secondEvent] };
 
     const event = { ...firstEvent, hour: 14, minute: 50 };
 
-    const state = reducer(
-      initialState,
-      editReminder({ dateKey, values: event })
-    );
+    const state = reducer(initialState, edit({ dateKey, values: event }));
 
     expect(state).toEqual({ [dateKey]: [secondEvent, event] });
+  });
+
+  test("deleteAll action", () => {
+    const initialState = { [dateKey]: [firstEvent, secondEvent] };
+    const date = new Date(2020, 7, 1);
+    const state = reducer(initialState, deleteAll(date));
+
+    expect(state).toEqual({ [dateKey]: [] });
   });
 });
 
@@ -70,7 +73,7 @@ describe("submitReminder action creator", () => {
   test("creates add action", () => {
     const date = new Date(2020, 7, 1);
 
-    const action = submitReminder(date, event);
+    const action = submit(date, event);
 
     expect(validate(action.payload.values.id)).toBe(true);
     expect(action.payload.values.timestamp).toEqual(
@@ -78,7 +81,7 @@ describe("submitReminder action creator", () => {
     );
 
     expect(action).toEqual({
-      type: addReminder.type,
+      type: add.type,
       payload: {
         dateKey: "2020-08-01",
         values: {
