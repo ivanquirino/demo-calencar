@@ -29,3 +29,6 @@ export const dateRemindersSelector = createSelector(
   dateReminders,
   mapReminders
 );
+
+export const makeRemindersMicroListSelector = () =>
+  createSelector(dateReminders, mapReminders);

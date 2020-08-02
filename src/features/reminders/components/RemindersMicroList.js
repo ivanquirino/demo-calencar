@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Box } from "theme-ui";
-import { dateRemindersSelector } from "../selectors";
+import { makeRemindersMicroListSelector } from "../selectors";
 
 function RemindersMicroList({ date }) {
-  const reminders = useSelector((state) => dateRemindersSelector(state, date));
+  const remindersSelector = useMemo(makeRemindersMicroListSelector, []);
+  const reminders = useSelector((state) => remindersSelector(state, date));
 
   return reminders.map((item) => {
     const { short, color, id } = item;

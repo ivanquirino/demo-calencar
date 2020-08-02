@@ -14,7 +14,7 @@ describe("Reminders state", () => {
     reminder: "of something",
     city: "Jampa",
     color: "#000000",
-    timestamp: "2020-08-01T14:30:00",
+    timestamp: "2020-08-01T14:30:00-03:00",
   };
 
   const firstEvent = {
@@ -22,7 +22,7 @@ describe("Reminders state", () => {
     reminder: "or someone",
     city: "Jampa",
     color: "#332211",
-    timestamp: "2020-08-01T12:30:00",
+    timestamp: "2020-08-01T12:30:00-03:00",
   };
 
   const date = new Date(2020, 7, 1);
