@@ -20,7 +20,7 @@ function DateDetail() {
       <Flex sx={{ justifyContent: "space-between", alignItems: "center" }}>
         <Flex sx={{ alignItems: "center" }}>
           <Button onClick={previousDayClick}>{"<"}</Button>
-          <Heading as="h2" mx={4}>
+          <Heading as="h2" sx={{ width: "300px", textAlign: "center", mx: 4 }}>
             {dateText}
           </Heading>
           <Button onClick={nextDayClick}>{">"}</Button>
