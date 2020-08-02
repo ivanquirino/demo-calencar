@@ -4,7 +4,7 @@ import Modal from "components/Modal";
 import Button from "components/Button";
 import { Flex, Box, Heading } from "theme-ui";
 import { dateDataSelector } from "../selectors";
-import { setMonth, nextDay, previousDay } from "../state";
+import { setMonth, nextDate, previousDate } from "../state";
 import ReminderContainer from "../../reminders/components/ReminderContainer";
 
 function DateDetail() {
@@ -12,8 +12,8 @@ function DateDetail() {
   const { show, dateText, date } = useSelector(dateDataSelector);
 
   const closeClick = () => dispatch(setMonth(date));
-  const previousDayClick = () => dispatch(previousDay(date));
-  const nextDayClick = () => dispatch(nextDay(date));
+  const previousDayClick = () => dispatch(previousDate(date));
+  const nextDayClick = () => dispatch(nextDate(date));
 
   return (
     <Modal show={show}>

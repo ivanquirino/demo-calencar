@@ -65,14 +65,7 @@ export const setMonth = (date) => ({
   payload: { year: getYear(date), month: getMonth(date), date: 0 },
 });
 
-export const nextDay = (date) => {
-  const next = addDays(date, 1);
-  return setDate(next);
-};
-
-export const previousDay = (date) => {
-  const next = subDays(date, 1);
-  return setDate(next);
-};
+export const nextDate = (date) => setDate(addDays(date, 1));
+export const previousDate = (date) => setDate(subDays(date, 1));
 
 export default slice.reducer;
