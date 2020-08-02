@@ -1,9 +1,10 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Box, Text } from "theme-ui";
+import React, { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Flex, Box, Text } from "theme-ui";
 import { isWeekend, getDate, isToday, isSameMonth } from "date-fns";
 import { setDate } from "../state";
 import RemindersMicroList from "../../reminders/components/RemindersMicroList";
+import { makeDayOfMonthForecastSelector } from "../../weather/selectors";
 
 const getStyle = (date, currentMonthDate) => {
   const weekend = isWeekend(date);
@@ -32,6 +33,8 @@ const getStyle = (date, currentMonthDate) => {
 function DayOfMonth(props) {
   const { date, currentMonthDate } = props;
 
+  const forecastSelector = useMemo(makeDayOfMonthForecastSelector, []);
+  const forecast = useSelector((state) => forecastSelector(state, date));
   const dispatch = useDispatch();
 
   const click = () => dispatch(setDate(date));
@@ -40,7 +43,11 @@ function DayOfMonth(props) {
 
   return (
     <Box sx={style} onClick={click}>
-      <Text>{getDate(date)}</Text>
+      <Flex sx={{ justifyContent: "space-between" }}>
+        <Text>{getDate(date)}</Text>
+        {forecast && <Text sx={{ fontSize: 0 }}>{forecast}</Text>}
+      </Flex>
+
       <RemindersMicroList date={date} />
     </Box>
   );

@@ -7,6 +7,7 @@ import { dateRemindersSelector } from "../selectors";
 import { deleteAll, deleteReminder } from "../state";
 import { fetchForecastByCity, clearForecast } from "../../weather/state";
 import { dateWeatherSelector } from "../../weather/selectors";
+import { decideFetchForecast } from "../../weather/functions";
 
 function Reminders({ date, setValues }) {
   const reminders = useSelector((state) => dateRemindersSelector(state, date));
@@ -16,7 +17,7 @@ function Reminders({ date, setValues }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (city) {
+    if (city && decideFetchForecast(timestamp)) {
       dispatch(fetchForecastByCity({ city, timestamp }));
     } else {
       dispatch(clearForecast(timestamp));
