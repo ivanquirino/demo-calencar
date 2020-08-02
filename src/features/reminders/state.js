@@ -34,10 +34,21 @@ const slice = createSlice({
       },
       prepare: (date) => ({ payload: getDateKey(date) }),
     },
+    deleteReminder: {
+      reducer: (state, action) => {
+        const { dateKey, id } = action.payload;
+
+        const dateReminders = state[dateKey];
+        const edited = dateReminders.filter((item) => item.id !== id);
+
+        return { ...state, [dateKey]: edited };
+      },
+      prepare: (date, id) => ({ payload: { dateKey: getDateKey(date), id } }),
+    },
   },
 });
 
-export const { add, edit, deleteAll } = slice.actions;
+export const { add, edit, deleteAll, deleteReminder } = slice.actions;
 
 export const submit = (date, values) => {
   const action = values.id ? edit : add;

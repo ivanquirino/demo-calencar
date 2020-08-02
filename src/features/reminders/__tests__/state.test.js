@@ -5,6 +5,7 @@ import reducer, {
   edit,
   submit,
   deleteAll,
+  deleteReminder,
 } from "features/reminders/state";
 
 describe("Reminders state", () => {
@@ -28,6 +29,7 @@ describe("Reminders state", () => {
     timestamp: "timestamp1",
   };
 
+  const date = new Date(2020, 7, 1);
   const dateKey = "2020-08-01";
 
   test("addReminder action", () => {
@@ -54,10 +56,16 @@ describe("Reminders state", () => {
 
   test("deleteAll action", () => {
     const initialState = { [dateKey]: [firstEvent, secondEvent] };
-    const date = new Date(2020, 7, 1);
     const state = reducer(initialState, deleteAll(date));
 
     expect(state).toEqual({ [dateKey]: [] });
+  });
+
+  test("delete action", () => {
+    const initialState = { [dateKey]: [firstEvent, secondEvent] };
+    const state = reducer(initialState, deleteReminder(date, firstEvent.id));
+
+    expect(state).toEqual({ [dateKey]: [secondEvent] });
   });
 });
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Flex, Text } from "theme-ui";
 import Button from "components/Button";
 import { dateRemindersSelector } from "../selectors";
-import { deleteAll } from "../state";
+import { deleteAll, deleteReminder } from "../state";
 
 function Reminders({ date, setValues }) {
   const reminders = useSelector((state) => dateRemindersSelector(state, date));
@@ -11,6 +11,8 @@ function Reminders({ date, setValues }) {
 
   const editReminder = (values) => () => setValues(values);
   const deleteAllReminders = () => dispatch(deleteAll(date));
+  const deleteReminderClick = (date, id) => () =>
+    dispatch(deleteReminder(date, id));
 
   return (
     <>
@@ -47,7 +49,12 @@ function Reminders({ date, setValues }) {
                 {reminder} at {time} on {city}
               </Text>
             </Flex>
-            <Button sx={{ bg: "red" }}>Delete</Button>
+            <Button
+              sx={{ bg: "red" }}
+              onClick={deleteReminderClick(date, item.id)}
+            >
+              Delete
+            </Button>
           </Flex>
         );
       })}
