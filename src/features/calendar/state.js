@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getYear, getMonth, getDate, addMonths, subMonths } from "date-fns";
+import {
+  getYear,
+  getMonth,
+  getDate,
+  addMonths,
+  subMonths,
+  addDays,
+  subDays,
+} from "date-fns";
 
 const now = new Date();
 
@@ -20,7 +28,7 @@ const slice = createSlice({
       const current = new Date(year, month);
       const next = addMonths(current, 1);
 
-      return { ...state, year: getYear(next), month: getMonth(next), date: 0 };
+      return { year: getYear(next), month: getMonth(next), date: 0 };
     },
     previousMonth: (state) => {
       const { year, month } = state;
@@ -28,7 +36,6 @@ const slice = createSlice({
       const previous = subMonths(current, 1);
 
       return {
-        ...state,
         year: getYear(previous),
         month: getMonth(previous),
         date: 0,
@@ -38,7 +45,7 @@ const slice = createSlice({
       reducer: (state, action) => {
         const { year, month, date } = action.payload;
 
-        return { ...state, year, month, date };
+        return { year, month, date };
       },
       prepare: (date) => ({
         payload: {
@@ -57,5 +64,15 @@ export const setMonth = (date) => ({
   type: setDate.type,
   payload: { year: getYear(date), month: getMonth(date), date: 0 },
 });
+
+export const nextDay = (date) => {
+  const next = addDays(date, 1);
+  return setDate(next);
+};
+
+export const previousDay = (date) => {
+  const next = subDays(date, 1);
+  return setDate(next);
+};
 
 export default slice.reducer;
