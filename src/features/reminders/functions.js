@@ -1,8 +1,8 @@
-import { compareAsc, formatISO } from "date-fns";
+import { compareAsc, formatISO, parseISO } from "date-fns";
 
 export function reminderCompare(reminderA, reminderB) {
-  const dateA = new Date(2000, 1, 1, reminderA.hour, reminderA.minute);
-  const dateB = new Date(2000, 1, 1, reminderB.hour, reminderB.minute);
+  const dateA = parseISO(reminderA.timestamp);
+  const dateB = parseISO(reminderB.timestamp);
 
   return compareAsc(dateA, dateB);
 }

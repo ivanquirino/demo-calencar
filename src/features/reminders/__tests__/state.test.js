@@ -12,21 +12,17 @@ describe("Reminders state", () => {
   const secondEvent = {
     id: "1",
     reminder: "of something",
-    hour: 12,
-    minute: 30,
     city: "Jampa",
     color: "#000000",
-    timestamp: "timestamp2",
+    timestamp: "2020-08-01T14:30:00",
   };
 
   const firstEvent = {
     id: "2",
     reminder: "or someone",
-    hour: 11,
-    minute: 15,
     city: "Jampa",
     color: "#332211",
-    timestamp: "timestamp1",
+    timestamp: "2020-08-01T12:30:00",
   };
 
   const date = new Date(2020, 7, 1);
@@ -47,7 +43,7 @@ describe("Reminders state", () => {
   test("editReminder action", () => {
     const initialState = { [dateKey]: [firstEvent, secondEvent] };
 
-    const event = { ...firstEvent, hour: 14, minute: 50 };
+    const event = { ...firstEvent, timestamp: "2020-08-01T14:50:00" };
 
     const state = reducer(initialState, edit({ dateKey, values: event }));
 
@@ -88,12 +84,14 @@ describe("submitReminder action creator", () => {
       expect.stringContaining("2020-08-01T12:30:00")
     );
 
+    const { hour, minute, ...submittedEvent } = event;
+
     expect(action).toEqual({
       type: add.type,
       payload: {
         dateKey: "2020-08-01",
         values: {
-          ...event,
+          ...submittedEvent,
           id: expect.any(String),
           timestamp: expect.any(String),
         },

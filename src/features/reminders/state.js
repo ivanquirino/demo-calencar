@@ -53,13 +53,16 @@ export const { add, edit, deleteAll, deleteReminder } = slice.actions;
 export const submit = (date, values) => {
   const action = values.id ? edit : add;
 
-  const { id, hour, minute } = values;
+  const { id, hour, minute, color, city, reminder } = values;
 
   const reminderId = id ? id : uuid();
   const timestamp = formatISO(setMinutes(setHours(date, hour), minute));
   const dateKey = getDateKey(date);
 
-  return action({ dateKey, values: { ...values, id: reminderId, timestamp } });
+  return action({
+    dateKey,
+    values: { reminder, city, color, id: reminderId, timestamp },
+  });
 };
 
 export default slice.reducer;
