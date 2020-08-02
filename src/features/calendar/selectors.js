@@ -2,6 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { getCalendarBoundaries } from "./functions";
 import { splitEvery } from "ramda";
 import { eachDayOfInterval, format } from "date-fns";
+import { getDateTitle } from "./functions";
 
 export const year = (state) => state.calendar.year;
 export const month = (state) => state.calendar.month;
@@ -31,7 +32,7 @@ export const dateDataSelector = createSelector(
   [year, month, date],
   (year, month, date) => {
     const selectedDate = new Date(year, month, date);
-    const dateText = format(selectedDate, "MMMM d, yyyy");
+    const dateText = getDateTitle(selectedDate);
 
     return { show: date > 0, dateText, date: selectedDate };
   }

@@ -7,12 +7,12 @@ function App() {
   return (
     <>
       <Container>
-        <Box mt={5}>
+        <Box mt={4}>
           <Heading as="h1" sx={{ textAlign: "center" }}>
             Demo Calendar App
           </Heading>
         </Box>
-        <Box mt={5} mb={5}>
+        <Box mt={4} mb={4}>
           <CalendarContainer />
         </Box>
       </Container>

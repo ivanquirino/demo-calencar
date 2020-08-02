@@ -8,6 +8,7 @@ import { deleteAll, deleteReminder } from "../state";
 import { fetchForecastByCity, clearForecast } from "../../weather/state";
 import { dateWeatherSelector } from "../../weather/selectors";
 import { decideFetchForecast } from "../../weather/functions";
+import ReminderItem from "./ReminderItem";
 
 function Reminders({ date, setValues }) {
   const reminders = useSelector((state) => dateRemindersSelector(state, date));
@@ -43,39 +44,15 @@ function Reminders({ date, setValues }) {
         )}
       </Flex>
 
-      {reminders.map((item) => {
-        const { id, reminder, city, color, time } = item;
-
-        return (
-          <Flex
-            key={id}
-            sx={{
-              justifyContent: "space-between",
-              alignItems: "center",
-              my: 2,
-              p: 2,
-              border: "1px solid",
-              borderColor: color,
-              borderRadius: 4,
-            }}
-          >
-            <Flex sx={{ alignItems: "center" }}>
-              <Button sx={{ mr: 3 }} onClick={editReminder(item)}>
-                Edit
-              </Button>
-              <Text>
-                {reminder} at {time} on {city}
-              </Text>
-            </Flex>
-            <Button
-              sx={{ bg: "red" }}
-              onClick={deleteReminderClick(date, item.id)}
-            >
-              Delete
-            </Button>
-          </Flex>
-        );
-      })}
+      {reminders.map((item) => (
+        <ReminderItem
+          key={item.id}
+          date={date}
+          editReminder={editReminder}
+          deleteReminderClick={deleteReminderClick}
+          {...item}
+        />
+      ))}
     </>
   );
 }

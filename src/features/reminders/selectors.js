@@ -19,7 +19,9 @@ export const mapReminders = (selectedReminders) => {
     const time = format(date, "kk:mm");
     const short = `${time} ${reminder}`;
 
-    return { ...item, hour, minute, short, time };
+    const reminderText = `${reminder} on ${time} at ${item.city}`;
+
+    return { ...item, hour, minute, short, reminderText };
   });
 
   return reminders;
