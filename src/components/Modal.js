@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Box } from "theme-ui";
+import { Container } from "theme-ui";
 import styled from "@emotion/styled";
 
 const Background = styled.div({
