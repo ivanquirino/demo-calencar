@@ -1,3 +1,45 @@
+# Demo Calendar App
+
+## Instructions
+
+### Running the project
+
+First install dependencies running `yarn install` on the project directory. Then run any of the options below:
+
+Production:
+1. `yarn build`
+2. ` npx serve -s build`
+
+Development: 
+* `yarn start`
+
+Run tests:
+* `yarn test`
+
+Hosted: 
+* https://democalendar.herokuapp.com/
+
+### Using the app
+
+1. Click on a date in the calendar to open the reminders window for that date
+2. Fill in the reminder form
+3. Click the button below the form to submit
+4. Edit or delete a reminder using the buttons in each reminder line
+5. Delete all reminders with the "Delete All" button
+6. Close the reminders window to see reminders in the Calendar view
+
+### Notes
+
+* Weather forecast is available only in the range of the current date plus 5 days (both inclusive)
+
+### Bonus Requirements
+
+* The calendar supports changing the month in the calendar view
+* Overflow for multiple reminders handled properly
+* It is possible to delete a specific reminder, or all reminders for a given date
+
+## Create React App
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
