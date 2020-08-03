@@ -31,6 +31,7 @@ Hosted:
 ### Notes
 
 * Weather forecast is available only in the range of the current date plus 5 days (both inclusive)
+* Weather forecast gets the forecast information for the city in the earliest reminder (the first) of the day.
 
 ### Bonus Requirements
 
