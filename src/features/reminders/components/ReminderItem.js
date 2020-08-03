@@ -5,6 +5,7 @@ import React from "react";
 function ReminderItem(props) {
   const { date, editReminder, deleteReminderClick, ...item } = props;
   const { id, color, reminderText } = item;
+
   return (
     <Flex
       key={id}
