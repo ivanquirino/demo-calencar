@@ -22,23 +22,25 @@ export const fetchForecastByCity = createAsyncThunk(
         isSameDay(date, fromUnixTime(dt))
       );
 
-      const result = reduce(
-        (acc, weather) => {
-          const { dt } = weather;
-          const weatherDate = fromUnixTime(dt);
-          const diff = Math.abs(differenceInMinutes(weatherDate, date));
+      if (dateResults.length > 0) {
+        const result = reduce(
+          (acc, weather) => {
+            const { dt } = weather;
+            const weatherDate = fromUnixTime(dt);
+            const diff = Math.abs(differenceInMinutes(weatherDate, date));
 
-          if (diff === 0) return reduced(weather);
-          if (diff < acc) return weather;
-          return acc;
-        },
-        dateResults[0], // amount of minutes of a day
-        dateResults
-      );
+            if (diff === 0) return reduced(weather);
+            if (diff < acc) return weather;
+            return acc;
+          },
+          dateResults[0], // amount of minutes of a day
+          dateResults
+        );
 
-      const { main, description } = result.weather[0];
+        const { main, description } = result.weather[0];
 
-      return { dateKey, forecast: `${main}, ${description}` };
+        return { dateKey, forecast: `${main}, ${description}` };
+      }
     } catch (e) {
       console.error(e);
     }
