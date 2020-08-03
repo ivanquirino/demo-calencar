@@ -18,7 +18,16 @@ function Modal(props) {
 
   return show ? (
     <Background>
-      <Container sx={{ bg: "white", my: "auto", borderRadius: "4px", p: 4 }}>
+      <Container
+        sx={{
+          bg: "white",
+          my: "auto",
+          borderRadius: "4px",
+          p: 4,
+          maxHeight: "100vh",
+          overflowY: "auto",
+        }}
+      >
         {children}
       </Container>
     </Background>
