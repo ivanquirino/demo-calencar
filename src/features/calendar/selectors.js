@@ -14,15 +14,10 @@ export const calendarDataSelector = createSelector(
     const currentMonthDate = new Date(year, month);
     const monthText = format(currentMonthDate, "MMMM yyyy");
 
-    const { start, end } = getCalendarBoundaries(currentMonthDate);
+    const boundaries = getCalendarBoundaries(currentMonthDate);
+    const dates = eachDayOfInterval(boundaries);
 
-    const calendar = splitEvery(
-      7,
-      eachDayOfInterval({
-        start,
-        end,
-      })
-    );
+    const calendar = splitEvery(7, dates);
 
     return { calendar, currentMonthDate, monthText };
   }
